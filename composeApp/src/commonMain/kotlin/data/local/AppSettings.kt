@@ -3,12 +3,14 @@ package data.local
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
-import kotlinx.atomicfu.locks.SynchronizedObject
-import kotlinx.atomicfu.locks.synchronized
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.internal.SynchronizedObject
+import kotlinx.coroutines.internal.synchronized
 import okio.Path.Companion.toPath
 
 internal const val dataStoreFileName = "settings.preferences_pb"
 
+@OptIn(InternalCoroutinesApi::class)
 object AppSettings {
     private lateinit var dataStore: DataStore<Preferences>
     private val lock = SynchronizedObject()
